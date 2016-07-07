@@ -4,7 +4,7 @@
 (require srfi/13)
 (require srfi/48)
 
-;;definition for responses
+;;definition for questions calling it "responses"
 (define responses
   '((1 "What type of films do you like?")
     (2 "So you like gore?")
@@ -12,27 +12,31 @@
     (8 "Shall I recommend a non-gory scary film for you?")))
 
     
-;;definition for possible answers
+;;definition for possible answers calling it "decisiontable"
 (define decisiontable
   '((1 ((comedy) 20) ((very scary) 2) ((thrillers) 6) ((not animated) 5) ((horror) 2) ((scfi) 4))
     (2 ((some) 8) ((a lot) 7) ((yes) 7) ((no) 8) ((not really) 8))
     (7 ((yes) gory) ((ok) gory) ((no) 0))
     (8 ((yes) non-gory) ((ok) gory) ((no) 0))))
 
+;;definition for procedure "assq-ref"
 (define (assq-ref assqlist id)
   (cdr (assq id assqlist)))
 
+;;definition for procedure "assv-ref"
 (define (assv-ref assqlist id)
   (cdr (assv id assqlist)))
 
+;;definition for procedure "get-response"
 (define (get-response id)
   (car (assq-ref responses id)))
 
+;;definition for procedure "get-keywords"
 (define (get-keywords id)
   (let ((keys (assq-ref decisiontable id)))
     (map (lambda (key) (car key)) keys)))
 
-
+;;definition for procedure "list-of-lengths"
 ;; outputs a list in the form: (0 0 0 2 0 0)
 (define (list-of-lengths keylist tokens)
   (map 
@@ -42,13 +46,14 @@
        (* (/ (length set) (length x)) (length set))))
    keylist))
 
+;;definition for procedure "index-of-largest-number"
 (define (index-of-largest-number list-of-numbers)
   (let ((n (car (sort list-of-numbers >))))
     (if (zero? n)
       #f
       (list-index (lambda (x) (eq? x n)) list-of-numbers))))
 
-
+;;definition for procedure "lookup"
 (define (lookup id tokens)
   (let* ((record (assv-ref decisiontable id))
          (keylist (get-keywords id))
@@ -57,7 +62,7 @@
       (cadr (list-ref record index))
       #f)))
 
-
+;;definition for procedure "recommend"
 (define (recommend initial-id)
   (let loop ((id initial-id))
     (format #t "~a\n> " (get-response id))
@@ -66,7 +71,7 @@
            (tokens (map string->symbol string-tokens)))
       (let ((response (lookup id tokens)))
         ;;conditional clause
-        (cond ((eq? #f response) ;;conditional predicate
+        (cond ((eq? #f response) ;;conditional predicate cond(same as "if")
 	       (format #t "huh? I didn't understand that! ") ;;conditional action
 	       (loop id)) 
 	      ((eq? 'gory response)
