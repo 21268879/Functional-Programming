@@ -69,7 +69,7 @@
 (define (recommend initial-id)
   (let loop ((id initial-id))                   ;Procedure loop
     (format #t "~a\n> " (get-response id))      ;Print out a response based on the id value 
-    (let* ((input (read-line))                  ;get and store user input as input with the use of read-line procedure
+    (let* ((input (read-line))                  ; With the use of read-line procedure get user input and with the use of sequential binding let* store the user input in the input identifier
            (string-tokens (string-tokenize input)) ;split the user input into the string-tokens list of substrings using string-tokenize
            (tokens (map string->symbol string-tokens))) ;the map procedure applies the string->symbol procedure to the supplied substrings that creates a mutable string out of each string-tokens substring
       (let ((response (lookup id tokens)))
@@ -88,6 +88,5 @@
 	       (exit))
 	      (else
 	       (loop response)))))))
-
 
 (recommend 2)
