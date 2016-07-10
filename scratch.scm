@@ -4,7 +4,7 @@
 (require srfi/13)
 (require srfi/48)
 
-;Definition for "responses" association list.
+;Definition for "responses" list
 (define responses
   '((1 "What type of films do you like?")
     (2 "So you like gore?" )
@@ -37,8 +37,10 @@
 
 ;Definition for "get-keywords" procedure that takes users answers for an argument.
 (define (get-keywords id)
-  (let ((keys (assq-ref decisiontable id)))
-    (map (λ (key) (car key)) keys)))
+  (let ((keys (assq-ref decisiontable id))) ;Creates "keys" identifier for elements retrieved from decisiontable beased on the "id".
+    (map (λ (key)                           ;"map" procedure applies "car" primitive procedure to each of the elements in the "keys" list.
+           (car key)) 
+         keys)))                
 
 ;Definition for "list-of-lengths" procedure, that outputs a list in the form: (0 0 0 2 0 0).
 (define (list-of-lengths keylist tokens)
@@ -59,7 +61,7 @@
 ;Definition for "lookup" procedure.
 (define (lookup id tokens) ;Takes in the "id" and the "response" from "recommend" procedure,
   (let* ((record (assv-ref decisiontable id)) ;creates the "record" indentifier that stores the results from the "assv-ref" procedure
-         (keylist (get-keywords id))
+         (keylist (get-keywords id)) ;
          (index (index-of-largest-number (list-of-lengths keylist tokens))))
     (if index 
       (cadr (list-ref record index))
