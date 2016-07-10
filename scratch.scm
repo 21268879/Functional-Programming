@@ -67,10 +67,10 @@
 
 ;;definition for procedure "recommend"
 (define (recommend initial-id)
-  (let loop ((id initial-id))                   ;
+  (let loop ((id initial-id))                   ;Procedure loop
     (format #t "~a\n> " (get-response id))      ;Print out a response based on the id value 
-    (let* ((input (read-line))                  ;get the input from a user
-           (string-tokens (string-tokenize input))
+    (let* ((input (read-line))                  ;get and store user input as input with the use of read-line procedure
+           (string-tokens (string-tokenize input)) ;split the user input into the string-tokens list of substrings using string-tokenize
            (tokens (map string->symbol string-tokens)))
       (let ((response (lookup id tokens)))
         ;;conditional clause
