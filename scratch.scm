@@ -7,14 +7,19 @@
 ;Definition for "responses" list
 (define responses
   '((1 "What type of games do you like?")
-    (2 "So you like gore?" )
+    (2 "So you like shooting stuff?" )
+    (20 "You are Lord of the Rings fans?")
+    (6 "Do you like the rush from speeding down the road?")
+    (5 "I hope you heard of Pokemon GO!")
+    (12 "World of Warcraft is what you're looking for my friend!")
+    (4 "Just need to wait for the sequal of Mass Effect :(")
     (3 "Should I reccomend a gory game to you?")
     (4 "Should I recommend a non-gory shooter game for you?")))
 
     
 ;Definition for "decisiontable" association list for possible answers from user.
 (define decisiontable
-  '((1 ((fantasy) 20) ((shooters) 2) ((racing) 6) ((animated) 5) ((RPG) 2) ((scfi) 4))
+  '((1 ((fantasy) 20) ((shooters) 2) ((racing) 6) ((animated) 5) ((RPG) 12) ((scfi) 4))
     (2 ((some) 8) ((a lot) 7) ((yes) 7) ((no) 8) ((not really) 8))
     (3 ((yes) gory) ((ok) gory) ((no) 0))
     (4 ((yes) non-gory) ((ok) gory) ((no) 0))
