@@ -21,7 +21,8 @@
 
 ;;definition for procedure "assq-ref", that receives list of responses and id number from get-response
 (define (assq-ref assqlist id)
-  (cdr (assq id assqlist)))         ;and by using the assq pair selector(returns the first element of responses list of which car is equal to id
+  (cdr (assq id assqlist)))         ;and by using the assq pair selector(returns the first element of responses list of which car is equal to id)
+                                    ;returns reminder of the pair as a list to get-response.                               
 
 ;;definition for procedure "assv-ref"
 (define (assv-ref assqlist id)
@@ -29,7 +30,8 @@
 
 ;;definition for procedure "get-response" receives id from procedure responses
 (define (get-response id)       
-  (car (assq-ref responses id))) ;passes a list of responses and id number to assq-ref
+  (car (assq-ref responses id))) ;passes a list of responses and id number to assq-ref, and then returns the list from
+                                 ;assq-ref as an atom into the loop from recommend 
 
 ;;definition for procedure "get-keywords" that takes users answers
 (define (get-keywords id)
