@@ -71,7 +71,7 @@
     (format #t "~a\n> " (get-response id))      ;Print out a response based on the id value 
     (let* ((input (read-line))                  ;get and store user input as input with the use of read-line procedure
            (string-tokens (string-tokenize input)) ;split the user input into the string-tokens list of substrings using string-tokenize
-           (tokens (map string->symbol string-tokens))) ;string->symbol creates a mutable string out of each string-tokens substring using the map procedure which applies it to the supplied substrings
+           (tokens (map string->symbol string-tokens))) ;the map procedure applies the string->symbol procedure to the supplied substrings that creates a mutable string out of each string-tokens substring
       (let ((response (lookup id tokens)))
         ;;conditional clause
         (cond ((eq? #f response) ;;conditional predicate cond(same as "if")
