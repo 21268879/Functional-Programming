@@ -6,15 +6,15 @@
 
 ;Definition for "responses" list
 (define responses
-  '((1 "What type of films do you like?")
+  '((1 "What type of games do you like?")
     (2 "So you like gore?" )
-    (3 "Shall I recommend a gory film for you?")
-    (4 "Shall I recommend a non-gory scary film for you?")))
+    (3 "Should I reccomend a gory game to you?")
+    (4 "Should I recommend a non-gory shooter game for you?")))
 
     
 ;Definition for "decisiontable" association list for possible answers from user.
 (define decisiontable
-  '((1 ((comedy) 20) ((very scary) 2) ((thrillers) 6) ((not animated) 5) ((horror) 2) ((scfi) 4))
+  '((1 ((fantasy) 20) ((shooters) 2) ((racing) 6) ((animated) 5) ((RPG) 2) ((scfi) 4))
     (2 ((some) 8) ((a lot) 7) ((yes) 7) ((no) 8) ((not really) 8))
     (3 ((yes) gory) ((ok) gory) ((no) 0))
     (4 ((yes) non-gory) ((ok) gory) ((no) 0))
@@ -61,8 +61,8 @@
 ;Definition for "lookup" procedure.
 (define (lookup id tokens) ;Takes in the "id" and the "response" from "recommend" procedure,
   (let* ((record (assv-ref decisiontable id)) ;creates the "record" indentifier that stores the results from the "assv-ref" procedure
-         (keylist (get-keywords id)) ;
-         (index (index-of-largest-number (list-of-lengths keylist tokens))))
+         (keylist (get-keywords id)) ;store reulting list from passed by "get-keywords" procedure
+         (index (index-of-largest-number (list-of-lengths keylist tokens)))) ;retrieve the index of the selected category using the "list-of-lengths" and "index-of-largest-number" procedures.
     (if index 
       (cadr (list-ref record index))
       #f)))
