@@ -7,7 +7,7 @@
 ;;definition for questions association list calling it "responses"
 (define responses
   '((1 "What type of films do you like?")
-    (2 "So you like gore?")
+    (2 "So you like gore?" )
     (3 "Shall I recommend a gory film for you?")
     (4 "Shall I recommend a non-gory scary film for you?")))
 
@@ -19,17 +19,17 @@
     (3 ((yes) gory) ((ok) gory) ((no) 0))
     (4 ((yes) non-gory) ((ok) gory) ((no) 0))))
 
-;;definition for procedure "assq-ref"
+;;definition for procedure "assq-ref", that receives list of responses and id number from get-response
 (define (assq-ref assqlist id)
-  (cdr (assq id assqlist)))
+  (cdr (assq id assqlist)))         ;and by using the assq pair selector(returns the first element of responses list of which car is equal to id
 
 ;;definition for procedure "assv-ref"
 (define (assv-ref assqlist id)
   (cdr (assv id assqlist)))
 
-;;definition for procedure "get-response"
-(define (get-response id)
-  (car (assq-ref responses id)))
+;;definition for procedure "get-response" receives id from procedure responses
+(define (get-response id)       
+  (car (assq-ref responses id))) ;passes a list of responses and id number to assq-ref
 
 ;;definition for procedure "get-keywords" that takes users answers
 (define (get-keywords id)
@@ -62,11 +62,12 @@
       (cadr (list-ref record index))
       #f)))
 
+
 ;;definition for procedure "recommend"
 (define (recommend initial-id)
-  (let loop ([id initial-id])                   ;
+  (let loop ((id initial-id))                   ;
     (format #t "~a\n> " (get-response id))      ;Print out a response based on the id value 
-    (let* ((input (read-line))                  ;get input from a user
+    (let* ((input (read-line))                  ;get the input from a user
            (string-tokens (string-tokenize input))
            (tokens (map string->symbol string-tokens)))
       (let ((response (lookup id tokens)))
